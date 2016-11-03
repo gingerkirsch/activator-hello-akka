@@ -1,6 +1,8 @@
-import org.scalatest.{ BeforeAndAfterAll, FlatSpecLike, Matchers }
-import akka.actor.{ Actor, Props, ActorSystem }
-import akka.testkit.{ ImplicitSender, TestKit, TestActorRef }
+import org.scalatest.{BeforeAndAfterAll, FlatSpecLike, Matchers}
+import akka.actor.{Actor, ActorSystem, Props}
+import akka.testkit.{ImplicitSender, TestActorRef, TestKit}
+import greeting.{Greet, Greeter, Greeting, WhoToGreet}
+
 import scala.concurrent.duration._
 
 class HelloAkkaSpec(_system: ActorSystem)
