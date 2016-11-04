@@ -1,6 +1,6 @@
 import sbt._
 
-lazy val akkaVersion = "2.4.4"
+lazy val akkaVersion = "2.4.12"
 
 val commonSettings = Seq(
   scalaVersion := "2.11.8",
@@ -35,7 +35,12 @@ lazy val `akka-streams` = (project in file("akka-streams"))
   .settings(commonSettings)
   .settings(
     name := """akka-streams""",
-    version := "1.0"
+    version := "1.0",
+    libraryDependencies ++= Seq(
+      "com.typesafe.akka" %% "akka-stream" % akkaVersion,
+      "com.typesafe.akka" %% "akka-stream-testkit" % akkaVersion,
+      "org.twitter4j" % "twitter4j-stream" % "4.0.3"
+    )
   )
   .dependsOn(`learning-akka` % "test->test;compile->compile")
 
