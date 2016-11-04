@@ -19,7 +19,7 @@ lazy val `learning-akka` = (project in file("."))
   .settings(
     name := """learning-akka"""
   )
-  .aggregate(firstSteps, akkaStreams, akkaCamel)
+  .aggregate(firstSteps, akkaStreams, akkaCamel, akkaHttp)
 
 lazy val `first-steps` = (project in file("first-steps"))
   .settings(commonSettings)
@@ -62,6 +62,23 @@ lazy val `akka-camel` = (project in file("akka-camel"))
   .dependsOn(`learning-akka` % "test->test;compile->compile")
 
 lazy val akkaCamel = LocalProject("akka-camel")
+
+lazy val `akka-http` = (project in file("akka-http"))
+  .settings(commonSettings)
+  .settings(
+    name := """akka-http""",
+    version := "1.0",
+    libraryDependencies ++= Seq(
+      "com.typesafe.akka" %% "akka-http-core" % "2.4.11",
+      "com.typesafe.akka" %% "akka-http-experimental" % "2.4.11",
+      "com.typesafe.akka" %% "akka-http-jackson-experimental" % "2.4.11",
+      "com.typesafe.akka" %% "akka-http-spray-json-experimental" % "2.4.11",
+      "com.typesafe.akka" %% "akka-http-xml-experimental" % "2.4.11"
+    )
+  )
+  .dependsOn(`learning-akka` % "test->test;compile->compile")
+
+lazy val akkaHttp = LocalProject("akka-http")
 
 
 
