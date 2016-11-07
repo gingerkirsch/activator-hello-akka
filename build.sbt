@@ -19,7 +19,7 @@ lazy val `learning-akka` = (project in file("."))
   .settings(
     name := """learning-akka"""
   )
-  .aggregate(firstSteps, akkaStreams, akkaCamel, akkaHttp)
+  .aggregate(firstSteps, akkaStreams, akkaCamel, akkaHttp, akkaPersistence)
 
 lazy val `first-steps` = (project in file("first-steps"))
   .settings(commonSettings)
@@ -79,6 +79,23 @@ lazy val `akka-http` = (project in file("akka-http"))
   .dependsOn(`learning-akka` % "test->test;compile->compile")
 
 lazy val akkaHttp = LocalProject("akka-http")
+
+lazy val `akka-persistence` = (project in file("akka-persistence"))
+  .settings(commonSettings)
+  .settings(
+    name := """akka-persistence""",
+    version := "1.0",
+    libraryDependencies ++= Seq(
+      "com.typesafe.akka" %% "akka-stream" % akkaVersion,
+      "com.typesafe.akka" %% "akka-persistence" % akkaVersion,
+      "com.typesafe.akka" %% "akka-persistence-query-experimental" % akkaVersion,
+      "org.iq80.leveldb" % "leveldb" % "0.7",
+      "org.fusesource.leveldbjni" % "leveldbjni-all" % "1.8"
+    )
+  )
+  .dependsOn(`learning-akka` % "test->test;compile->compile")
+
+lazy val akkaPersistence = LocalProject("akka-persistence")
 
 
 
