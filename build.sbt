@@ -19,7 +19,7 @@ lazy val `learning-akka` = (project in file("."))
   .settings(
     name := """learning-akka"""
   )
-  .aggregate(firstSteps, akkaStreams, akkaCamel, akkaHttp, akkaPersistence)
+  .aggregate(firstSteps, akkaStreams, akkaCamel, akkaHttp, akkaPersistence, akkaCluster)
 
 lazy val `first-steps` = (project in file("first-steps"))
   .settings(commonSettings)
@@ -96,6 +96,20 @@ lazy val `akka-persistence` = (project in file("akka-persistence"))
   .dependsOn(`learning-akka` % "test->test;compile->compile")
 
 lazy val akkaPersistence = LocalProject("akka-persistence")
+
+lazy val `akka-cluster` = (project in file("akka-cluster"))
+  .settings(commonSettings)
+  .settings(
+    name := """akka-cluster""",
+    version := "1.0",
+    libraryDependencies ++= Seq(
+      "com.typesafe.akka" %% "akka-remote" % akkaVersion,
+      "com.typesafe.akka" %% "akka-cluster" % akkaVersion
+    )
+  )
+  .dependsOn(`learning-akka` % "test->test;compile->compile")
+
+lazy val akkaCluster = LocalProject("akka-cluster")
 
 
 
